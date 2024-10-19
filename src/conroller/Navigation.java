@@ -10,15 +10,14 @@ public class Navigation {
     private boolean gameover = false;
 
     public Navigation() {
-        int row = 10;
-        int col = 10;
+        final int oceanRows = 10;
+        final int oceanCols = 10;
         State coordinateState = State.WATER;
 
-        ocean = new Ocean(row, col, coordinateState);
+        ocean = new Ocean(oceanRows, oceanCols, coordinateState);
         radar = new Radar();
         radar.detect(ocean.getQuadrant());
-        placeShips();
-        run();
+
     }
 
     public void run() {
@@ -37,4 +36,13 @@ public class Navigation {
         ocean.setQuadrant(3, 5, State.SHIP);
         radar.detect(ocean.getQuadrant());
     }
+
+    public static int[] convertCoordiante(String input) {
+        // in ASCII or Unicode 'a' is represented by 97, so a - a = 0, and b - a = 1 etc.
+        int row = input.toLowerCase().charAt(0) - 'a';
+        int col = Integer.parseInt(input.substring(1)) - 1;
+
+        return new int[]{row, col};
+    }
 }
+
