@@ -3,21 +3,21 @@ package model;
 import java.util.Arrays;
 
 public class Ocean {
-    private State[][] quadrant;
+    private char[][] map;
 
-    public Ocean(int row, int col, State state) {
-        this.quadrant = new State[row][col];
-        for (State[] states : quadrant) {
-            Arrays.fill(states, state);
-        }
+    public Ocean(int row, int col, char cellState) {
+        this.map = new char[row][col];
+       for (char[] parts : map) {
+           Arrays.fill(parts, cellState);
+       }
     }
 
-    public State[][] getQuadrant() {
-        return quadrant;
+    public char[][] getMap() {
+        return map;
     }
 
-    public void setQuadrant(int row, int col, State state) {
-        this.quadrant[row][col] = state;
+    public void updateCell(int row, int col, char state) {
+        this.map[row][col] = state;
     }
 
 

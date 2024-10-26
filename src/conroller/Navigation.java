@@ -1,7 +1,6 @@
 package conroller;
 
 import model.Ocean;
-import model.State;
 import view.Radar;
 
 public class Navigation {
@@ -9,14 +8,14 @@ public class Navigation {
     private Radar radar;
     private boolean gameover = false;
 
-    public Navigation() {
-        final int oceanRows = 10;
-        final int oceanCols = 10;
-        State coordinateState = State.WATER;
+    final int MAP_ROWS = 10;
+    final int MAP_COLS = 10;
+    final char CELL_STATE = '~';
 
-        ocean = new Ocean(oceanRows, oceanCols, coordinateState);
+    public Navigation() {
+        ocean = new Ocean(MAP_ROWS, MAP_COLS, CELL_STATE);
         radar = new Radar();
-        radar.detect(ocean.getQuadrant());
+        radar.showMap(ocean.getMap());
 
     }
 
@@ -31,10 +30,10 @@ public class Navigation {
     private void placeShips() {
         // TODO:
         //  There is a method required to take/process ship-objects to avoid boilerplate like that:
-        ocean.setQuadrant(3, 3, State.SHIP);
-        ocean.setQuadrant(3, 4, State.SHIP);
-        ocean.setQuadrant(3, 5, State.SHIP);
-        radar.detect(ocean.getQuadrant());
+        ocean.updateCell(3, 3, 'O');
+        ocean.updateCell(3, 4, 'O');
+        ocean.updateCell(3, 5, 'O');
+        radar.showMap(ocean.getMap());
     }
 
     public static int[] convertCoordiante(String input) {
