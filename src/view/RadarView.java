@@ -6,7 +6,7 @@ package view;
  * handling user interaction
  * */
 
-public class Radar {
+public class RadarView {
     public void showMap(char[][] map) {
 
         // Add numbers 1-10 above game board for column enumeration

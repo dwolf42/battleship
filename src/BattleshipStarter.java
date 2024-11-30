@@ -1,6 +1,4 @@
-import conroller.Navigation;
-
-import java.util.Arrays;
+import conroller.NavigationController;
 
 /*
  * Basically, and ocean consists of quadrants, like 1x1 meters.
@@ -11,11 +9,11 @@ import java.util.Arrays;
  *
  * */
 
-public class Main {
+public class BattleshipStarter {
     public static void main(String[] args) {
 
 
-        Navigation navigation = new Navigation();
-        navigation.run();
+        NavigationController navigationController = new NavigationController();
+        navigationController.run();
     }
 }
