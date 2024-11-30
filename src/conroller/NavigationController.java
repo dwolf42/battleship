@@ -4,23 +4,27 @@ import model.OceanModel;
 import model.ShipModel;
 import view.RadarView;
 
+import java.util.ArrayList;
+
 public class NavigationController {
     private OceanModel oceanModel;
     private RadarView radarView;
-    private ShipModel shipModel;
+    private ArrayList<ShipModel> usrShips;
+    private ArrayList<ShipModel> cpuShips;
     private boolean gameover = false;
 
     final private int MAP_ROWS = 10;
     final private int MAP_COLS = 10;
     final private char CELL_STATE = '~';
-    final private String[] SHIP_TYPES = {"Battle Cruiser"};
-
-
+    final private String[] SHIP_TYPES = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
+    final private int[] SHIP_LENGTH = {5, 4, 3, 3, 2};
 
     public NavigationController() {
         oceanModel = new OceanModel(MAP_ROWS, MAP_COLS, CELL_STATE);
         radarView = new RadarView();
-        radarView.showMap(oceanModel.getMap());
+        usrShips = new ArrayList<>();
+        cpuShips = new ArrayList<>();
+        radarView.showMap(oceanModel.getOcean());
 
     }
 
@@ -32,13 +36,14 @@ public class NavigationController {
         }
     }
 
-    private void placeShips() {
-        // TODO:
-        //  There is a method required to take/process ship-objects to avoid boilerplate like that:
-        oceanModel.updateCell(3, 3, 'O');
-        oceanModel.updateCell(3, 4, 'O');
-        oceanModel.updateCell(3, 5, 'O');
-        radarView.showMap(oceanModel.getMap());
+    private void initialShipPlacement() {
+        for(int i = 0; i < SHIP_TYPES.length; i++) {
+            usrShips.add(new ShipModel(SHIP_TYPES[i],
+                    SHIP_LENGTH[i],
+                    SHIP_LENGTH[i],
+
+                    ))
+        }
     }
 
     public static int[] convertCoordiante(String input) {
