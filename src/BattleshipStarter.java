@@ -1,4 +1,4 @@
-import conroller.NavigationController;
+import conroller.GameController;
 
 /*
  * Basically, and ocean consists of quadrants, like 1x1 meters.
@@ -13,7 +13,7 @@ public class BattleshipStarter {
     public static void main(String[] args) {
 
 
-        NavigationController navigationController = new NavigationController();
-        navigationController.run();
+        GameController gameController = new GameController();
+        gameController.run();
     }
 }

@@ -1,23 +1,19 @@
-package model;
+package assets;
 
-public class ShipModel {
+public class Ship {
     private String typ;
-    private int health;
-    private int length;
-    private int x1, x2, y1, y2;
     private boolean isSunken;
-
-    public ShipModel(String type,
-                     int health,
-                     int length,
-                     int x1,
-                     int x2,
-                     int y1,
-                     int y2,
-                     boolean isSunken) {
+    private int size, x1, x2, y1, y2;
+    public Ship(String type,
+                boolean isSunken,
+                int size,
+                int x1,
+                int x2,
+                int y1,
+                int y2
+                     ) {
         this.typ = type;
-        this.health = health;
-        this.length = length;
+        this.size = size;
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
@@ -33,20 +29,12 @@ public class ShipModel {
         this.typ = typ;
     }
 
-    public int getHealth() {
-        return health;
+    public int getSize() {
+        return size;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public int getX1() {
