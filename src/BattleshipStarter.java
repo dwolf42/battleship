@@ -11,9 +11,6 @@ import conroller.GameController;
 
 public class BattleshipStarter {
     public static void main(String[] args) {
-
-
-
         GameController gameController = new GameController();
         gameController.run();
     }

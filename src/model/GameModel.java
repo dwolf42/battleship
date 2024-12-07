@@ -28,6 +28,10 @@ public class GameModel {
         this.gameMap[row][col] = state;
     }
 
+    public void makeMove() {
+        System.out.println(ConstModel.ASK_COORDINATE.getStr());
+    }
+
     public void initShips() {
         usrShips = new ArrayList<>();
         for (int i = 0; i < SHIP_TYPES.length; i++) {

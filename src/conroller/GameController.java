@@ -12,10 +12,10 @@ public class GameController {
         gameModel = new GameModel();
         gameView = new GameView();
         gameView.showMap(gameModel.getMap());
-        gameModel.initShips();
     }
 
     public void run() {
+        gameModel.makeMove();
         while (!gameover) {
 
 
