@@ -15,7 +15,7 @@ public class GameController {
     }
 
     public void run() {
-        gameModel.makeMove();
+        gameModel.getValidMove();
         while (!gameover) {
 
 

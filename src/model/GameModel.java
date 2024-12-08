@@ -28,8 +28,27 @@ public class GameModel {
         this.gameMap[row][col] = state;
     }
 
-    public void makeMove() {
-        System.out.println(ConstModel.ASK_COORDINATE.getStr());
+    public void getValidMove() {
+        System.out.println(ConstantsModel.ASK_FIRST_COORDINATE);
+        Scanner scanner = new Scanner(System.in);
+        boolean isValidInput = false;
+        char[] firstCoordinate;
+
+        while(!isValidInput) {
+        String input = scanner.nextLine().trim().toUpperCase();
+
+        if(
+                !(input.charAt(0) > 'J')
+        || !(input.charAt(1) > 10)) {
+            return
+        }
+        }
+
+        if(firstCoordinate[0] > 'J'
+                || firstCoordinate[1] > 10) {
+            System.out.println(ConstantsModel.INVALID_COORDINATE);
+        }
+
     }
 
     public void initShips() {
@@ -50,17 +69,17 @@ public class GameModel {
     private int[] getCoordinates() {
         int[] coordinates = new int[4];
         for (int i = 0; i < coordinates.length; i++) {
-            System.out.println(ConstantsModel.ASK_COORDINATE);
+            System.out.println(ConstantsModel.ASK_FIRST_COORDINATE);
             coordinates[i] = new Scanner(System.in).nextInt();
         }
         return coordinates;
 }
 
 
-/*     y 1    2    3
+/*     y 1    2    3    4
  * x A [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *   B [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
- *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *   C [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
@@ -70,7 +89,15 @@ public class GameModel {
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *
  *
+ * A2
+ *    A4
+ *    C2
+ *   ~B4
+ *   ~C4
  *
+ *
+ *
+ * A2 B3
  *
  * */
 
