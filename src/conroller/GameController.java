@@ -11,12 +11,12 @@ public class GameController {
     public GameController() {
         gameModel = new GameModel();
         gameView = new GameView();
-        gameView.showMap(gameModel.getMap());
     }
 
     public void run() {
-        gameModel.makeMove();
+        gameModel.placeShips();
         while (!gameover) {
+            gameView.showMap(gameModel.getMap());
 
 
         }
