@@ -31,7 +31,8 @@ public class ShipModel {
     public LinkedList<ShipModel> initShips() {
         LinkedList<ShipModel> ships = new LinkedList<>();
         for (int i = 0; i < SHIP_NAMES.size(); i++) {
-            askShipCoordinates(SHIP_NAMES.get(i));
+            askShipCoordinates(SHIP_NAMES.get(i),
+                    SHIP_SIZES.get(i));
             ships.add(new ShipModel(
                     SHIP_NAMES.get(i),
                     SHIP_SIZES.get(i),
@@ -42,7 +43,7 @@ public class ShipModel {
         return ships;
     }
 
-    private void askShipCoordinates(String shipName) {
+    private void askShipCoordinates(String shipName, Integer shipSize) {
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println(ConstantsModel.ASK_COORDINATE_START + shipName);
