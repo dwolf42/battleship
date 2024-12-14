@@ -27,21 +27,20 @@ public class BattleshipStarter {
         int[] move = parseMove(coordinatesInput);
         System.out.println(Arrays.toString(move));
     }
+
     // FIXME: index out of bounds: parameter array has only 2 indexes, target int array has 4
     private static int[] parseMove(String[] coordinatesInput) {
         int[] parsedMove = new int[4];
-        for (int i = 0; i < parsedMove.length; i++) {
-            if (i % 2 == 0) {
-                parsedMove[i] = coordinatesInput[i].toUpperCase().charAt(0) - 65;
-            } else {
-                parsedMove[i] = Integer.parseInt(coordinatesInput[i].substring(1)) - 1;
-            }
+        for (int i = 0; i < coordinatesInput.length; i++) {
+            // These two lines were made by ChatGPT
+            parsedMove[i * 2] = coordinatesInput[i].toUpperCase().charAt(0) - 65;
+            parsedMove[i * 2 + 1] = Integer.parseInt(coordinatesInput[i].substring(1)) - 1;
         }
         return parsedMove;
-    }
+}
 
-    private static void init() {
-        GameController gameController = new GameController();
-        gameController.run();
-    }
+private static void init() {
+    GameController gameController = new GameController();
+    gameController.run();
+}
 }
