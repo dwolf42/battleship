@@ -22,12 +22,5 @@ public class GameController {
         }
     }
 
-    public static int[] convertCoordiante(String input) {
-        // in ASCII or Unicode 'a' is represented by 97, so a - a = 0, and b - a = 1 etc.
-        int row = input.toLowerCase().charAt(0) - 'a';
-        int col = Integer.parseInt(input.substring(1)) - 1;
-
-        return new int[]{row, col};
-    }
 }
 

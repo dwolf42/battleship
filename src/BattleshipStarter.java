@@ -14,33 +14,9 @@ import java.util.Scanner;
 
 public class BattleshipStarter {
     public static void main(String[] args) {
-       /*
-       // Convert user guess to board indices
-          function parseGuess(guess) {
-          const row = guess[0].toUpperCase().charCodeAt(0) - 65;  // Convert letter to row index
-          const col = parseInt(guess[1]) - 1;  // Convert number to column index
-          return [row, col];
-}
-        */
-        Scanner scanner = new Scanner(System.in);
-        String[] coordinatesInput = scanner.nextLine().split(" ");
-        int[] move = parseMove(coordinatesInput);
-        System.out.println(Arrays.toString(move));
+        GameController gameController = new GameController();
+        gameController.run();
     }
-
-    // FIXME: index out of bounds: parameter array has only 2 indexes, target int array has 4
-    private static int[] parseMove(String[] coordinatesInput) {
-        int[] parsedMove = new int[4];
-        for (int i = 0; i < coordinatesInput.length; i++) {
-            // These two lines were made by ChatGPT
-            parsedMove[i * 2] = coordinatesInput[i].toUpperCase().charAt(0) - 65;
-            parsedMove[i * 2 + 1] = Integer.parseInt(coordinatesInput[i].substring(1)) - 1;
-        }
-        return parsedMove;
-}
-
-private static void init() {
-    GameController gameController = new GameController();
-    gameController.run();
-}
+    private static void init() {
+    }
 }

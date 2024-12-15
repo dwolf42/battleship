@@ -2,18 +2,20 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class GameModel {
 
+    Scanner scanner;
     private ArrayList<ShipModel> usrShipModels;
     private ArrayList<ShipModel> cpuShipModels;
     private char[][] gameMap;
 
     public GameModel() {
         this.gameMap = new char[10][10];
-        for (char[] parts : gameMap) {
-            Arrays.fill(parts, '~');
+        for (char[] locations : gameMap) {
+            Arrays.fill(locations, '~');
         }
     }
 
@@ -25,26 +27,75 @@ public class GameModel {
         this.gameMap[row][col] = state;
     }
 
-    public void placeShips() {
-        System.out.println(ConstantsModel.ASK_COORDINATE_START);
+    public LinkedList<ShipModel> initShips() {
+        String shipCoordinateStart;
+        String shipCoordinateEnd;
+
+        LinkedList<ShipModel> ships = new LinkedList<>();
+        for (int i = 0; i < ConstantsModel.SHIP_NAMES.size(); i++) {
+            askShipCoordinates(ConstantsModel.SHIP_NAMES.get(i),
+                    ConstantsModel.SHIP_SIZES.get(i));
+            ships.add(new ShipModel(
+                    ConstantsModel.SHIP_NAMES.get(i),
+                    ConstantsModel.SHIP_SIZES.get(i),
+                    false,
+                    shipCoordinateStart,
+                    shipCoordinateEnd));
+        }
+        return ships;
     }
 
-    /*     y 1    2    3
-     * x A [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *   B [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
-     *
-     *
-     *
-     *
-     * */
+    public void placeShips() {
+        System.out.println(ConstantsModel.ASK_COORDINATE_START);
+        scanner = new Scanner(System.in);
+        int[] move = parseMove(
+                askShipCoordinates()
+                );
+        System.out.println(Arrays.toString(move));
+    }
+
+    private String[] askShipCoordinates(String shipName, Integer shipSize) {
+        scanner = new Scanner(System.in);
+        do {
+            System.out.println(ConstantsModel.ASK_COORDINATE_START + shipName);
+            shipCoordinateStart = scanner.nextLine();
+            // TODO: condition shall take shipSize into account
+        } while (!shipCoordinateStart.matches("[A-J](10|[1-9])"));
+
+        do {
+            System.out.println(ConstantsModel.ASK_COORDINATE_END + shipName);
+            shipCoordinateEnd = scanner.nextLine();
+            // TODO: condition shall take shipSize into account
+        } while (!shipCoordinateStart.matches("[A-J](10|[1-9])"));
+    }
+
+    private static int[] parseMove(String[] coordinatesInput) {
+        int[] parsedMove = new int[4];
+        for (int i = 0; i < coordinatesInput.length; i++) {
+            // These two lines were made by ChatGPT
+            parsedMove[i * 2] = coordinatesInput[i].toUpperCase().charAt(0) - 65;
+            parsedMove[i * 2 + 1] = Integer.parseInt(coordinatesInput[i].substring(1)) - 1;
+        }
+        return parsedMove;
+    }
+}
+
+/*     y 1    2    3
+ * x A [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *   B [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *
+ *
+ *
+ *
+ * */
 
 
 }
