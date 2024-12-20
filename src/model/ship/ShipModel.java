@@ -1,9 +1,13 @@
-package model;
+package model.ship;
 
 public class ShipModel {
     private String shipName;
     private boolean isSunken;
     private int shipSize;
+    private final int shipFront1;
+    private final int shipFront2;
+    private final int shipBack1;
+    private final int shipBack2;
 
     public ShipModel(
             String shipName,
