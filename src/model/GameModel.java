@@ -1,5 +1,10 @@
 package model;
 
+import model.ship.CarrierModel;
+import model.ship.BattleshipModel;
+import model.ship.CruiserModel;
+import model.ship.SubmarineModel;
+import model.ship.DestroyerModel;
 import model.ship.ShipModel;
 
 import java.util.ArrayList;
@@ -31,14 +36,14 @@ public class GameModel {
 
     public LinkedList<ShipModel> initShips() {
         LinkedList<ShipModel> ships = new LinkedList<>();
-        for (int i = 0; i < ConstantsModel.SHIP_NAMES.size(); i++) {
-            askShipCoordinates(ConstantsModel.SHIP_NAMES.get(i),
-                    ConstantsModel.SHIP_SIZES.get(i));
-            ships.add(new ShipModel(
-                    ConstantsModel.SHIP_NAMES.get(i),
-                    ConstantsModel.SHIP_SIZES.get(i),
-                    false
-            ));
+        ships.add(new CarrierModel());
+        ships.add(new BattleshipModel());
+        ships.add(new CruiserModel());
+        ships.add(new SubmarineModel());
+        ships.add(new DestroyerModel());
+        for (int i = 0; i < ships.size(); i++) {
+            askShipCoordinates(ships.get(i).getShipName(),
+                    ships.get(i).getShipSize());
         }
         return ships;
     }
