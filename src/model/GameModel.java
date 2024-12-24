@@ -57,23 +57,22 @@ public class GameModel {
         System.out.println(Arrays.toString(move));
     }
 
-    private String[] askShipCoordinates(String shipName, Integer shipSize) {
-        scanner = new Scanner(System.in);
-        String shipCoordinateStart = "";
+    // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
+    // for parsing them to array indexes
+    private int askAndValidCoords(String shipName, String shipSize) {
+        Scanner scanner = new Scanner(System.in);
+        String[] coords;
+        // TODO: implement a loop for asking the user for coords, which displays 'Error' when invalid
         do {
-            System.out.println(ConstantsModel.ASK_COORDINATE_START + shipName);
-            // TODO: condition shall take shipSize into account
-        } while (!shipCoordinateStart.matches("[A-J](10|[1-9])"));
-
-        do {
-            System.out.println(ConstantsModel.ASK_COORDINATE_END + shipName);
-            // TODO: condition shall take shipSize into account
-        } while (!shipCoordinateStart.matches("[A-J](10|[1-9])"));
-       // TODO: FIX ME
-        return null;
+            System.out.println(ConstantsModel.ASK_COORDINATES + shipName);
+            System.out.println(ConstantsModel.TELL_SIZE + shipSize);
+            coords = scanner.nextLine().toUpperCase().split(" ");
+        } while (!coords[0].matches(ConstantsModel.VALID_COORD_PATTERN)
+                && !coords[1].matches(ConstantsModel.VALID_COORD_PATTERN));
+        int[] indexes = parseCoords(coords);
     }
 
-    private static int[] parseMove(String[] coordinatesInput) {
+    private int[] parseCoords(String[] coords) {
         int[] parsedMove = new int[4];
         for (int i = 0; i < coordinatesInput.length; i++) {
             // These two lines were made by ChatGPT
