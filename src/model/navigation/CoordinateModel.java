@@ -1,18 +1,14 @@
-package model.ship;
-
-import model.ConstantsModel;
-
-import java.util.Scanner;
+package model.navigation;
 
 public class CoordinateModel {
     private int x;
     private int y;
     private boolean isHit;
 
-    public CoordinateMo del(int x, int y, boolean isHit) {
+    public CoordinateModel(int x, int y) {
         this.x = x;
         this.y = y;
-        this.isHit = isHit
+        this.isHit = false;
     }
 
     public int getX() {
@@ -23,11 +19,11 @@ public class CoordinateModel {
         return y;
     }
 
-    public getIsHit() {
+    public boolean getIsHit() {
         return isHit;
     }
 
-    public setIsHit(boolean isHit) {
+    public void setIsHit(boolean isHit) {
         this.isHit = isHit;
     }
 }

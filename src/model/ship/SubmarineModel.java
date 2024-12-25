@@ -1,4 +1,4 @@
-﻿package model.ship;
+package model.ship;
 
 public class SubmarineModel extends ShipModel {
     public SubmarineModel() {
