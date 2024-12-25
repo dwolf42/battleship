@@ -1,5 +1,6 @@
 package model;
 
+import conroller.CoordinateController;
 import model.ship.CarrierModel;
 import model.ship.BattleshipModel;
 import model.ship.CruiserModel;
@@ -43,17 +44,11 @@ public class GameModel {
         ships.add(new DestroyerModel());
 
         int[] validIndexes;
-
         for (int i = 0; i < ships.size(); i++) {
-           validIndexes = askAndValidCoords(ships.get(i).getShipName(),
+           validIndexes = CoordinateController.askAndValidateCoords(ships.get(i).getShipName(),
                     ships.get(i).getShipSize());
-            ships.get(i).setShipFront1(validIndexes[0]);
-            ships.get(i).setShipFront1(validIndexes[1]);
-            ships.get(i).setShipFront1(validIndexes[2]);
-            ships.get(i).setShipFront1(validIndexes[3]);
-           for (int j = 0; j < validIndexes.length; j++) {
-               ships.get(i).setShipFront1(validIndexes[j]);
-           }
+           // TODO: implement logic which sets the coordinates between start and end coordinate or better
+           //       said which fills the coordinates between A and B with the correct coordinates
         }
         return ships;
     }

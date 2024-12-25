@@ -5,18 +5,16 @@ import model.ConstantsModel;
 import java.util.Scanner;
 
 public class CoordinateController {
-    static Scanner scanner = new Scanner(System.in);
 
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
     // for parsing them to array indexes
     public static int[] askAndValidateCoords(String shipName, int shipSize) {
-        scanner = new Scanner(System.in);
         String[] coords;
         // TODO: implement a loop for asking the user for coords, which displays 'Error' when invalid
 
         System.out.println(ConstantsModel.ASK_COORDINATES + shipName);
         System.out.println(ConstantsModel.TELL_SIZE + shipSize);
-        coords = scanner.nextLine().toUpperCase().split(" ");
+        coords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
 
         while (!coords[0].matches(ConstantsModel.VALID_COORD_PATTERN)
                 && !coords[1].matches(ConstantsModel.VALID_COORD_PATTERN)) {
