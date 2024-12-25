@@ -1,22 +1,28 @@
 package model;
 
-import assets.Ship;
+import model.ship.CarrierModel;
+import model.ship.BattleshipModel;
+import model.ship.CruiserModel;
+import model.ship.SubmarineModel;
+import model.ship.DestroyerModel;
+import model.ship.ShipModel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameModel {
-    final private String[] SHIP_TYPES = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
-    final private int[] SHIP_SIZES = {5, 4, 3, 3, 2, 1};
-    private ArrayList<Ship> usrShips;
-    private ArrayList<Ship> cpuShips;
+    Scanner scanner;
+    private LinkedList<ShipModel> usrShipModels;
+    private LinkedList<ShipModel> cpuShipModels;
     private char[][] gameMap;
 
     public GameModel() {
         this.gameMap = new char[10][10];
-        for (char[] parts : gameMap) {
-            Arrays.fill(parts, '~');
+        for (char[] locations : gameMap) {
+            Arrays.fill(locations, '~');
         }
     }
 
@@ -28,59 +34,41 @@ public class GameModel {
         this.gameMap[row][col] = state;
     }
 
-    public void getValidMove() {
-        System.out.println(ConstantsModel.ASK_FIRST_COORDINATE);
-        Scanner scanner = new Scanner(System.in);
-        boolean isValidInput = false;
-        char[] firstCoordinate;
+    public LinkedList<ShipModel> initShips() {
+        LinkedList<ShipModel> ships = new LinkedList<>();
+        ships.add(new CarrierModel());
+        ships.add(new BattleshipModel());
+        ships.add(new CruiserModel());
+        ships.add(new SubmarineModel());
+        ships.add(new DestroyerModel());
 
-        while(!isValidInput) {
-        String input = scanner.nextLine().trim().toUpperCase();
+        int[] validIndexes;
 
-        if(
-                !(input.charAt(0) > 'J')
-        || !(input.charAt(1) > 10)) {
-            return
+        for (int i = 0; i < ships.size(); i++) {
+           validIndexes = askAndValidCoords(ships.get(i).getShipName(),
+                    ships.get(i).getShipSize());
+            ships.get(i).setShipFront1(validIndexes[0]);
+            ships.get(i).setShipFront1(validIndexes[1]);
+            ships.get(i).setShipFront1(validIndexes[2]);
+            ships.get(i).setShipFront1(validIndexes[3]);
+           for (int j = 0; j < validIndexes.length; j++) {
+               ships.get(i).setShipFront1(validIndexes[j]);
+           }
         }
-        }
-
-        if(firstCoordinate[0] > 'J'
-                || firstCoordinate[1] > 10) {
-            System.out.println(ConstantsModel.INVALID_COORDINATE);
-        }
-
+        return ships;
     }
 
-    public void initShips() {
-        usrShips = new ArrayList<>();
-        for (int i = 0; i < SHIP_TYPES.length; i++) {
-            usrShips.add(new Ship(
-                    SHIP_TYPES[i],
-                    false,
-                    SHIP_SIZES[i],
-                    0,
-                    0,
-                    0,
-                    0));
-        }
-        // TODO: init cpuShips
+    public void placeShips() {
+        usrShipModels = initShips();
     }
 
-    private int[] getCoordinates() {
-        int[] coordinates = new int[4];
-        for (int i = 0; i < coordinates.length; i++) {
-            System.out.println(ConstantsModel.ASK_FIRST_COORDINATE);
-            coordinates[i] = new Scanner(System.in).nextInt();
-        }
-        return coordinates;
 }
 
-
-/*     y 1    2    3    4
+/*     y 1    2    3
  * x A [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
- *   B [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
- *   C [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
- *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
+ *   B [(~)][(~)][(~)][(~)][(~)][(~)][(O)][(~)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(O)][(X)][(~)][(~)]
+ *     [(~)][(~)][(~)][(~)][(~)][(~)][(O)][(M)][(~)][(~)]
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
@@ -89,17 +77,6 @@ public class GameModel {
  *     [(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)][(~)]
  *
  *
- * A2
- *    A4
- *    C2
- *   ~B4
- *   ~C4
  *
- *
- *
- * A2 B3
  *
  * */
-
-
-}

@@ -1,5 +1,8 @@
 import conroller.GameController;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 /*
  * Basically, and ocean consists of quadrants, like 1x1 meters.
  * Each quadrant can have a state, like being water, a ship, a hit ship, or a miss.
@@ -13,5 +16,7 @@ public class BattleshipStarter {
     public static void main(String[] args) {
         GameController gameController = new GameController();
         gameController.run();
+    }
+    private static void init() {
     }
 }
