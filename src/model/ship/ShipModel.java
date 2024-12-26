@@ -43,7 +43,7 @@ public class ShipModel {
         return coordinates;
     }
 
-    public void setCoordinat(int index, CoordinateModel coordinate) {
+    public void setCoordinate(int index, CoordinateModel coordinate) {
         coordinates[index] = coordinate;
     }
 }

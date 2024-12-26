@@ -11,8 +11,6 @@ import model.ship.ShipModel;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GameModel {
     Scanner scanner;
@@ -43,10 +41,17 @@ public class GameModel {
         ships.add(new SubmarineModel());
         ships.add(new DestroyerModel());
 
-        int[] validIndexes;
+        /**
+         * zuerst fragt man die Anfangs und Endkoordinaten ab
+         * die Koordinaten zwischen Anfang und Ende müssen generiert werden, anhand der
+         * Größe des Schiffs. Diese werden dann zu CoordinateModels umgewandelt,
+         * welche im Schiff gespeichert werden.
+         */
+        int[] validStartAndEndArrayCoords;
         for (int i = 0; i < ships.size(); i++) {
-           validIndexes = CoordinateController.askAndValidateCoords(ships.get(i).getShipName(),
+           validStartAndEndArrayCoords = CoordinateController.askValidateBoardCoords(ships.get(i).getShipName(),
                     ships.get(i).getShipSize());
+           ships.get(i).
            // TODO: implement logic which sets the coordinates between start and end coordinate or better
            //       said which fills the coordinates between A and B with the correct coordinates
         }
