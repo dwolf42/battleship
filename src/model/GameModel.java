@@ -49,7 +49,7 @@ public class GameModel {
          */
         int[] validStartAndEndArrayCoords;
         for (int i = 0; i < ships.size(); i++) {
-           validStartAndEndArrayCoords = CoordinateController.askValidateBoardCoords(ships.get(i).getShipName(),
+           validStartAndEndArrayCoords = CoordinateController.askCoords(ships.get(i).getShipName(),
                     ships.get(i).getShipSize());
            ships.get(i).
            // TODO: implement logic which sets the coordinates between start and end coordinate or better

@@ -10,7 +10,7 @@ public class CoordinateController {
 
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
     // for parsing them to array indexes
-    public static int[] askValidateBoardCoords(String shipName, int shipSize) {
+    public static int[] askCoords(String shipName, int shipSize) {
         String[] coords;
         System.out.println(ConstantsModel.ASK_BOARD_COORDS + shipName);
         System.out.println(ConstantsModel.TELL_SIZE + shipSize);
@@ -23,9 +23,10 @@ public class CoordinateController {
             System.out.println(ConstantsModel.TELL_SIZE + shipSize);
             coords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
         }
-        return fillCoordGaps(parseCoords(coords), shipSize);
+        return extrapolateBodyCoords(parseCoords(coords), shipSize);
     }
 
+    // Parse coords from alphanumeric to array-index format, so they can be represented in an array
     private static int[] parseCoords(String[] coords) {
         int[] parsedCoords = new int[4];
         for (int i = 0; i < coords.length; i++) {
@@ -35,11 +36,22 @@ public class CoordinateController {
         }
         return parsedCoords;
     }
-   private static int[] fillCoordGaps(int[] parsedCoords, int shipSize) {
+
+    // User input consists only of start/end coords of a ship, from which the coords of the ship parts in between must
+    // be extrapolated
+   private static int[] extrapolateBodyCoords(int[] parsedCoords, int shipSize) {
+       // F3 G3 H3
+       // 52 62 72
+       // 1,0 2,0
+       int[] fullShipCoords = new int[shipSize * 2];
+       // F3 H3 (vertical)
+       if (parsedCoords[0] != parsedCoords[3]) {
+          fullShipCoords[0] = parsedCoords[0];
+          fullShipCoords[1] = parsedCoords[3];
+       }
        List<Integer> filledCoordGaps = new ArrayList();
-       for (int i = 0; i < shipSize * 2; i++) {
-           filledCoordGaps.addFirst();
-            filledCoordGaps.add(parsedCoords[i];
+       for (int i = 0; i < parsedCoords[2]; i++) {
+          filledCoordGaps.add(parsedCoords);
        }
    }
 }
