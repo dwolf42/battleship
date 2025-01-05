@@ -1,6 +1,7 @@
 package model;
 
 import conroller.CoordinateController;
+import model.navigation.CoordinateModel;
 import model.ship.CarrierModel;
 import model.ship.BattleshipModel;
 import model.ship.CruiserModel;
@@ -47,11 +48,14 @@ public class GameModel {
          * Größe des Schiffs. Diese werden dann zu CoordinateModels umgewandelt,
          * welche im Schiff gespeichert werden.
          */
-        int[] validStartAndEndArrayCoords;
+        CoordinateModel[] validStartAndEndArrayCoords;
         for (int i = 0; i < ships.size(); i++) {
-           validStartAndEndArrayCoords = CoordinateController.askCoords(ships.get(i).getShipName(),
+           validStartAndEndArrayCoords = CoordinateController
+                   .askCoords(ships.get(i).getShipName(),
                     ships.get(i).getShipSize());
-           ships.get(i).
+          for (int j = 0; j < ships.get(i).getShipSize(); j++) {
+              ships.get(i).setCoordinate(j, validStartAndEndArrayCoords[j]);
+          }
            // TODO: implement logic which sets the coordinates between start and end coordinate or better
            //       said which fills the coordinates between A and B with the correct coordinates
         }

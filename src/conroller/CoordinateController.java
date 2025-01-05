@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CoordinateController {
+    private int x;
+    private int y;
+    private boolean isHit;
 
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
     // for parsing them to array indexes

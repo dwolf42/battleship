@@ -17,6 +17,7 @@ public class ShipModel {
         this.isSunken = isSunken;
         this.shipSize = shipSize;
         this.coordinates = new CoordinateModel[shipSize];
+
     }
 
     public void shoot() {
