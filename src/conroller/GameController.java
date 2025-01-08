@@ -1,22 +1,28 @@
 package conroller;
 
 import model.GameModel;
-import view.GameView;
+import view.MapView;
 
 public class GameController {
     private GameModel gameModel;
-    private GameView gameView;
+    private MapView mapView;
+    private MapController mapController;
     private boolean gameover = false;
 
     public GameController() {
         gameModel = new GameModel();
-        gameView = new GameView();
+        mapController = new MapController();
+        mapView = mapController;
+        ShipModel newShip = shipController.createShip()
     }
 
-    public void run() {
+    public void initializeGame() {
+    }
+
+    private void runGame() {
         gameModel.placeShips();
         while (!gameover) {
-            gameView.showMap(gameModel.getMap());
+            mapView.display(gameModel.getMap());
 
 
         }

@@ -6,8 +6,8 @@ package view;
  * handling user interaction
  * */
 
-public class GameView {
-    public void showMap(char[][] map) {
+public class MapView {
+    public void display(char[][] map) {
 
         // Add numbers 1-10 above game board for column enumeration
         for (int i = 0; i < map.length; i++) {
