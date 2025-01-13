@@ -2,14 +2,9 @@ package conroller;
 
 import model.ConstantsModel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CoordinateController {
-    private int x;
-    private int y;
-    private boolean isHit;
 
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
     // for parsing them to array indexes
@@ -26,35 +21,67 @@ public class CoordinateController {
             System.out.println(ConstantsModel.TELL_SIZE + shipSize);
             coords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
         }
-        return extrapolateBodyCoords(parseCoords(coords), shipSize);
+        return extrapolateBodyCoords(parseCoordsToArrayIndexes(coords), shipSize);
     }
 
-    // Parse coords from alphanumeric to array-index format, so they can be represented in an array
-    private static int[] parseCoords(String[] coords) {
+    /**
+     * To represent the alphanumeric coords in an array-index format, they require parsing
+     *
+     * @param userInputCoords
+     * @return array-index parsed alphanumeric coords
+     */
+    private static int[] parseCoordsToArrayIndexes(String[] userInputCoords) {
         int[] parsedCoords = new int[4];
-        for (int i = 0; i < coords.length; i++) {
+        for (int i = 0; i < userInputCoords.length; i++) {
             // These two lines were made by ChatGPT
-            parsedCoords[i * 2] = coords[i].toUpperCase().charAt(0) - 65;
-            parsedCoords[i * 2 + 1] = Integer.parseInt(coords[i].substring(1)) - 1;
+            parsedCoords[i * 2] = userInputCoords[i].toUpperCase().charAt(0) - 65;
+            parsedCoords[i * 2 + 1] = Integer.parseInt(userInputCoords[i].substring(1)) - 1;
         }
         return parsedCoords;
     }
 
-    // User input consists only of start/end coords of a ship, from which the coords of the ship parts in between must
-    // be extrapolated
-   private static int[] extrapolateBodyCoords(int[] parsedCoords, int shipSize) {
-       // F3 G3 H3
-       // 52 62 72
-       // 1,0 2,0
-       int[] fullShipCoords = new int[shipSize * 2];
-       // F3 H3 (vertical)
-       if (parsedCoords[0] != parsedCoords[3]) {
-          fullShipCoords[0] = parsedCoords[0];
-          fullShipCoords[1] = parsedCoords[3];
-       }
-       List<Integer> filledCoordGaps = new ArrayList();
-       for (int i = 0; i < parsedCoords[2]; i++) {
-          filledCoordGaps.add(parsedCoords);
-       }
-   }
+    /**
+     * User input consists only of the coordinates of a ships front and tail, the ship's body part's locations
+     * have to be extrapolated from these.
+     *
+     * @param parsedCoords index 0 and 1 represent the ships front, index 2 and 3 the tail.
+     * @param shipSize     is a ship's length.
+     * @return an array containing the extrapolated
+     */
+    private static int[] extrapolateBodyCoords(int[] parsedCoords, int shipSize) {
+        int[] allShipPartsCoords = new int[shipSize * 2];
+
+        int xCoord = parsedCoords[0];
+        int yCoord = parsedCoords[1];
+
+        /* In case the even indexes of parsedCoords are equal, this value of the equal indexes remains unchanged
+         * for all coordinates and only the odd indexes are extrapolated.
+         * In this case, the 3rd index determines the upper limit for the extrapolation.
+         */
+        if (parsedCoords[0] == parsedCoords[2]) {
+            for (int i = 0; i < parsedCoords[3]; i++) {
+                if (i % 2 == 0) {
+                    allShipPartsCoords[i] = xCoord;
+                } else {
+                    allShipPartsCoords[i] = yCoord;
+                    yCoord++;
+                }
+            }
+        }
+
+        /* In case the odd indexes of parsedCoords are equal, this value of the odd indexes remains unchanged
+         * for all coordinates and only the even indexes are extrapolated.
+         * In this case, the 2nd index determines the upper limit for the extrapolation.
+         */
+        if (parsedCoords[1] == parsedCoords[3]) {
+            for (int i = 0; i < parsedCoords[2]; i++) {
+                if (i % 2 == 0) {
+                    allShipPartsCoords[i] = xCoord;
+                    xCoord++;
+                }
+                allShipPartsCoords[i] = yCoord;
+            }
+        }
+        return allShipPartsCoords;
+    }
 }
