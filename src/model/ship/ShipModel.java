@@ -2,22 +2,22 @@ package model.ship;
 
 import model.navigation.CoordinateModel;
 
+import java.util.LinkedList;
+
 public class ShipModel {
     private String shipName;
     private boolean isSunken;
     private int shipSize;
-    private CoordinateModel[] coordinates;
+    private CoordinateModel[] shipCoords;
 
     public ShipModel(
             String shipName,
             boolean isSunken,
             int shipSize
-            ) {
+    ) {
         this.shipName = shipName;
         this.isSunken = isSunken;
         this.shipSize = shipSize;
-        this.coordinates = new CoordinateModel[shipSize];
-
     }
 
     public void shoot() {
@@ -40,11 +40,15 @@ public class ShipModel {
         isSunken = sunken;
     }
 
-    public CoordinateModel[] getCoordinates() {
-        return coordinates;
+    public CoordinateModel[] getShipCoords() {
+        return shipCoords;
+    }
+
+    public void placeShip(CoordinateModel[] shipCoords) {
+        this.shipCoords = shipCoords;
     }
 
     public void setCoordinate(int index, CoordinateModel coordinate) {
-        coordinates[index] = coordinate;
+        shipCoords[index] = coordinate;
     }
 }

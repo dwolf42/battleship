@@ -1,6 +1,7 @@
 package conroller;
 
 import model.GameModel;
+import model.ship.ShipModel;
 import view.MapView;
 
 public class GameController {
@@ -13,7 +14,6 @@ public class GameController {
         gameModel = new GameModel();
         mapController = new MapController();
         mapView = mapController;
-        ShipModel newShip = shipController.createShip()
     }
 
     public void initializeGame() {

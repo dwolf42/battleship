@@ -1,14 +1,21 @@
 package conroller;
 
 import model.ConstantsModel;
+import model.navigation.CoordinateModel;
+import model.ship.ShipModel;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CoordinateController {
 
+    public static ShipModel placeShip(ShipModel ship) {
+       // TODO: rebuild methods to use ship object to ask and set coordinates
+        return ship;
+    }
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
     // for parsing them to array indexes
-    public static int[] askCoords(String shipName, int shipSize) {
+    private static int[] askCoords(String shipName, int shipSize) {
         String[] coords;
         System.out.println(ConstantsModel.ASK_BOARD_COORDS + shipName);
         System.out.println(ConstantsModel.TELL_SIZE + shipSize);
@@ -21,6 +28,7 @@ public class CoordinateController {
             System.out.println(ConstantsModel.TELL_SIZE + shipSize);
             coords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
         }
+
         return extrapolateBodyCoords(parseCoordsToArrayIndexes(coords), shipSize);
     }
 
@@ -46,7 +54,7 @@ public class CoordinateController {
      *
      * @param parsedCoords index 0 and 1 represent the ships front, index 2 and 3 the tail.
      * @param shipSize     is a ship's length.
-     * @return an array containing the extrapolated
+     * @return an array containing the parsedCoords and the extrapolated coords.
      */
     private static int[] extrapolateBodyCoords(int[] parsedCoords, int shipSize) {
         int[] allShipPartsCoords = new int[shipSize * 2];

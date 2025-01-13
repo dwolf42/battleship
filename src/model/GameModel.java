@@ -36,29 +36,12 @@ public class GameModel {
 
     public LinkedList<ShipModel> initShips() {
         LinkedList<ShipModel> ships = new LinkedList<>();
-        ships.add(new CarrierModel());
-        ships.add(new BattleshipModel());
-        ships.add(new CruiserModel());
-        ships.add(new SubmarineModel());
-        ships.add(new DestroyerModel());
+        ships.add(CoordinateController.placeShip(new CarrierModel()));
+        ships.add(CoordinateController.placeShip(new BattleshipModel()));
+        ships.add(CoordinateController.placeShip(new CruiserModel()));
+        ships.add(CoordinateController.placeShip(new SubmarineModel()));
+        ships.add(CoordinateController.placeShip(new DestroyerModel()));
 
-        /**
-         * zuerst fragt man die Anfangs und Endkoordinaten ab
-         * die Koordinaten zwischen Anfang und Ende müssen generiert werden, anhand der
-         * Größe des Schiffs. Diese werden dann zu CoordinateModels umgewandelt,
-         * welche im Schiff gespeichert werden.
-         */
-        CoordinateModel[] validStartAndEndArrayCoords;
-        for (int i = 0; i < ships.size(); i++) {
-           validStartAndEndArrayCoords = CoordinateController
-                   .askCoords(ships.get(i).getShipName(),
-                    ships.get(i).getShipSize());
-          for (int j = 0; j < ships.get(i).getShipSize(); j++) {
-              ships.get(i).setCoordinate(j, validStartAndEndArrayCoords[j]);
-          }
-           // TODO: implement logic which sets the coordinates between start and end coordinate or better
-           //       said which fills the coordinates between A and B with the correct coordinates
-        }
         return ships;
     }
 
