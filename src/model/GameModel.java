@@ -35,12 +35,18 @@ public class GameModel {
     }
 
     public LinkedList<ShipModel> initShips() {
+
+        ShipModel Aydin = new ShipModel("Aydin", false, 5);
+        Aydin.
+
         LinkedList<ShipModel> ships = new LinkedList<>();
         ships.add(CoordinateController.placeShip(new CarrierModel()));
         ships.add(CoordinateController.placeShip(new BattleshipModel()));
         ships.add(CoordinateController.placeShip(new CruiserModel()));
         ships.add(CoordinateController.placeShip(new SubmarineModel()));
         ships.add(CoordinateController.placeShip(new DestroyerModel()));
+
+        // ships.add(
 
         return ships;
     }

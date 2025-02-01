@@ -1,35 +1,40 @@
 package conroller;
 
 import model.ConstantsModel;
-import model.navigation.CoordinateModel;
 import model.ship.ShipModel;
 
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CoordinateController {
 
+    public CoordinateController(ShipModel ship) {
+
+    }
     public static ShipModel placeShip(ShipModel ship) {
        // TODO: rebuild methods to use ship object to ask and set coordinates
+        ShipModel tempShip = ship;
+        askCoords(ship);
+
         return ship;
     }
-    // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preperation
+
+    // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preparation
     // for parsing them to array indexes
-    private static int[] askCoords(String shipName, int shipSize) {
+    private static int[] askCoords(ShipModel ship) {
         String[] coords;
-        System.out.println(ConstantsModel.ASK_BOARD_COORDS + shipName);
-        System.out.println(ConstantsModel.TELL_SIZE + shipSize);
+        System.out.println(ConstantsModel.ASK_BOARD_COORDS + ship.getName());
+        System.out.println(ConstantsModel.TELL_SIZE + ship.getSize());
         coords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
 
         while (!coords[0].matches(ConstantsModel.COORDS_REGEX)
                 && !coords[1].matches(ConstantsModel.COORDS_REGEX)) {
             System.out.println(ConstantsModel.TELL_ERROR);
-            System.out.println(ConstantsModel.ASK_BOARD_COORDS + shipName);
-            System.out.println(ConstantsModel.TELL_SIZE + shipSize);
+            System.out.println(ConstantsModel.ASK_BOARD_COORDS + ship.getName());
+            System.out.println(ConstantsModel.TELL_SIZE + ship.getSize());
             coords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
         }
 
-        return extrapolateBodyCoords(parseCoordsToArrayIndexes(coords), shipSize);
+        return extrapolateBodyCoords(parseCoordsToArrayIndexes(coords), ship.getSize());
     }
 
     /**

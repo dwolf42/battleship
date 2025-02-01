@@ -1,8 +1,7 @@
 package model.ship;
 
+import conroller.CoordinateController;
 import model.navigation.CoordinateModel;
-
-import java.util.LinkedList;
 
 public class ShipModel {
     private String shipName;
@@ -24,11 +23,11 @@ public class ShipModel {
         System.out.println("Pew Pew");
     }
 
-    public String getShipName() {
+    public String getName() {
         return shipName;
     }
 
-    public int getShipSize() {
+    public int getSize() {
         return shipSize;
     }
 
@@ -44,8 +43,8 @@ public class ShipModel {
         return shipCoords;
     }
 
-    public void placeShip(CoordinateModel[] shipCoords) {
-        this.shipCoords = shipCoords;
+    public void placeShip() {
+        this.shipCoords = new CoordinateController(this);
     }
 
     public void setCoordinate(int index, CoordinateModel coordinate) {
