@@ -8,19 +8,19 @@ public enum ShipTypes {
     DESTROYER("Destroyer", 2);
 
     private final String label;
-    private final int health;
+    private final int shipSize;
 
-    ShipTypes(final String label, final int health) {
+    ShipTypes(final String label, final int shipSize) {
         this.label = label;
-        this.health = health;
+        this.shipSize = shipSize;
     }
 
     public String getLabel() {
         return this.label;
     }
 
-    public int getHealth() {
-        return this.health;
+    public int getShipSize() {
+        return this.shipSize;
     }
 
 }

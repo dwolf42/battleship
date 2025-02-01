@@ -10,13 +10,11 @@ public class ShipModel {
     private CoordinateModel[] shipCoords;
 
     public ShipModel(
-            String shipName,
-            boolean isSunken,
-            int shipSize
+            ShipTypes shipType
     ) {
-        this.shipName = shipName;
-        this.isSunken = isSunken;
-        this.shipSize = shipSize;
+        this.shipName = shipType.getLabel();
+        this.shipSize = shipType.getShipSize();
+        this.isSunken = false;
     }
 
     public void shoot() {
@@ -44,7 +42,7 @@ public class ShipModel {
     }
 
     public void placeShip() {
-        this.shipCoords = new CoordinateController(this);
+        this.shipCoords = CoordinateController.placeShip(this);
     }
 
     public void setCoordinate(int index, CoordinateModel coordinate) {

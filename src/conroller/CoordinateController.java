@@ -2,20 +2,18 @@ package conroller;
 
 import model.ConstantsModel;
 import model.ship.ShipModel;
-
+import model.navigation.CoordinateModel;
 import java.util.Scanner;
 
 public class CoordinateController {
+    private static ShipModel localShip;
 
-    public CoordinateController(ShipModel ship) {
-
-    }
-    public static ShipModel placeShip(ShipModel ship) {
+    public static CoordinateModel placeShip(ShipModel ship) {
        // TODO: rebuild methods to use ship object to ask and set coordinates
-        ShipModel tempShip = ship;
-        askCoords(ship);
+        localShip = ship;
+        CoordinateModel[] shipCoords = askCoords(localShip);
 
-        return ship;
+        return localShip;
     }
 
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preparation

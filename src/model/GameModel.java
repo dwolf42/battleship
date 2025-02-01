@@ -33,17 +33,8 @@ public class GameModel {
 
         LinkedList<ShipModel> ships = new LinkedList<>();
         for (ShipTypes shipType : ShipTypes.values()) {
-            ships.add(CoordinateController.placeShip(new ShipModel(shipType));
+            ships.add(CoordinateController.placeShip(new ShipModel(shipType)));
         }
-
-        ships.add(CoordinateController.placeShip(new CarrierModel()));
-        ships.add(CoordinateController.placeShip(new BattleshipModel()));
-        ships.add(CoordinateController.placeShip(new CruiserModel()));
-        ships.add(CoordinateController.placeShip(new SubmarineModel()));
-        ships.add(CoordinateController.placeShip(new DestroyerModel()));
-
-        // ships.add(
-
         return ships;
     }
 

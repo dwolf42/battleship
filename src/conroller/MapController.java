@@ -1,4 +1,4 @@
-﻿package conroller;
+package conroller;
 
 public class MapController {
 }
