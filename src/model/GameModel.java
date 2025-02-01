@@ -1,13 +1,8 @@
 package model;
 
 import conroller.CoordinateController;
-import model.navigation.CoordinateModel;
-import model.ship.CarrierModel;
-import model.ship.BattleshipModel;
-import model.ship.CruiserModel;
-import model.ship.SubmarineModel;
-import model.ship.DestroyerModel;
 import model.ship.ShipModel;
+import model.ship.ShipTypes;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -36,10 +31,11 @@ public class GameModel {
 
     public LinkedList<ShipModel> initShips() {
 
-        ShipModel Aydin = new ShipModel("Aydin", false, 5);
-        Aydin.
-
         LinkedList<ShipModel> ships = new LinkedList<>();
+        for (ShipTypes shipType : ShipTypes.values()) {
+            ships.add(CoordinateController.placeShip(new ShipModel(shipType));
+        }
+
         ships.add(CoordinateController.placeShip(new CarrierModel()));
         ships.add(CoordinateController.placeShip(new BattleshipModel()));
         ships.add(CoordinateController.placeShip(new CruiserModel()));
