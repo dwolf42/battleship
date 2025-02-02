@@ -41,8 +41,8 @@ public class ShipModel {
         return shipCoords;
     }
 
-    public void placeShip() {
-        this.shipCoords = CoordinateController.placeShip(this);
+    public void putShip(CoordinateModel[] shipCoords) {
+        this.shipCoords = shipCoords;
     }
 
     public void setCoordinate(int index, CoordinateModel coordinate) {
