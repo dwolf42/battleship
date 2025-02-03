@@ -7,17 +7,17 @@ import view.MapView;
 public class GameController {
     private GameModel gameModel;
     private MapView mapView;
-    private boolean gameover = false;
+    private boolean gameover;
 
-    public void initializeGame() {
-        gameModel = new GameModel();
-        mapView = new MapView();
-        runGame();
-    }
+   public GameController() {
+       gameover = false;
+       gameModel = new GameModel();
+       mapView = new MapView();
+       mapView.display(gameModel.getMap());
+       gameModel.placeShips();
+   }
 
-    private void runGame() {
-        mapView.display(gameModel.getMap());
-        gameModel.placeShips();
+    public void runGame() {
         while (!gameover) {
             mapView.display(gameModel.getMap());
 
