@@ -8,10 +8,9 @@ import java.util.Scanner;
 
 public class CoordinateController {
     public static ShipModel placeShip(ShipModel ship) {
-        String[] userInputCoords;
 
         askCoords(ship.getName(), ship.getSize());
-        userInputCoords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
+        String[] userInputCoords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
 
         while (!userInputCoords[0].matches(ConstantsModel.COORDS_REGEX)
                 && !userInputCoords[1].matches(ConstantsModel.COORDS_REGEX)) {
