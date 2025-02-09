@@ -8,7 +8,20 @@ import java.util.Scanner;
 
 public class CoordinateController {
     public static ShipModel placeShip(ShipModel ship) {
+        // TODO: too may arrays, quite a mess, needs to be improved
+        int[] parsedCoords = parseCoordsToArrayIndexes(askUserInputCoords);
+        int[] fullShipCoords = extrapolateBodyCoords(parsedCoords, ship.getSize());
+        CoordinateModel[] shipCoordinates = new CoordinateModel[fullShipCoords.length];
+        for (int i = 0; i < shipCoordinates.length - 1; i++) {
+            shipCoordinates[i] = new CoordinateModel(i, i + 1);
+        }
 
+        ship.putShip(shipCoordinates);
+
+        return ship;
+    }
+
+    private static String[] askUserInputCoords() {
         askCoords(ship.getName(), ship.getSize());
         String[] userInputCoords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
 
@@ -19,17 +32,7 @@ public class CoordinateController {
             userInputCoords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
         }
 
-        // TODO: too may arrays, quite a mess, needs to be improved
-        int[] parsedCoords = parseCoordsToArrayIndexes(userInputCoords);
-        int[] fullShipCoords = extrapolateBodyCoords(parsedCoords, ship.getSize());
-        CoordinateModel[] shipCoordinates = new CoordinateModel[fullShipCoords.length];
-        for (int i = 0; i < shipCoordinates.length -1; i++) {
-           shipCoordinates[i] = new CoordinateModel(i, i + 1);
-        }
-
-        ship.putShip(shipCoordinates);
-
-        return ship;
+        return userInputCoords;
     }
 
     // Coordinates are input by user as a string like 'D3 D6'. Tokenization allows easier validation and preparation
