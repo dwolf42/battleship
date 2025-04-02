@@ -1,7 +1,7 @@
 package model.ship;
 
 import conroller.CoordinateController;
-import model.navigation.CoordinateModel1;
+import model.navigation.CoordinateModel;
 
 public class ShipModel {
     private String shipName;

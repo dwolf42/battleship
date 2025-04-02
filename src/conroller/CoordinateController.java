@@ -5,6 +5,7 @@ import model.ship.ShipModel;
 import model.navigation.CoordinateModel;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class CoordinateController {
     private static ShipModel ship;
@@ -34,7 +35,7 @@ public class CoordinateController {
             askCoords(ship.getName(), ship.getSize());
             userInputCoords = new Scanner(System.in).nextLine().toUpperCase().split(" ");
         }
-
+        System.out.println("Ask Ship Coords: " + Arrays.toString(userInputCoords));
         return parseCoordsToArrayIndexes(userInputCoords);
     }
 
@@ -58,6 +59,8 @@ public class CoordinateController {
             parsedCoords[i * 2] = userInputCoords[i].toUpperCase().charAt(0) - 65;
             parsedCoords[i * 2 + 1] = Integer.parseInt(userInputCoords[i].substring(1)) - 1;
         }
+
+        System.out.println("parsedCoords" + Arrays.toString(parsedCoords));
         return extrapolateBodyCoords(parsedCoords);
     }
 
@@ -102,6 +105,7 @@ public class CoordinateController {
                 allShipPartsCoords[i] = yCoord;
             }
         }
+        System.out.println("allShipPartsCoords: " + Arrays.toString(allShipPartsCoords));
         return allShipPartsCoords;
     }
 }
