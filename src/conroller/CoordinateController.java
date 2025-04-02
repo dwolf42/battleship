@@ -19,6 +19,8 @@ public class CoordinateController {
         }
         ship.putShip(shipCoordinates);
 
+
+
         return ship;
     }
 

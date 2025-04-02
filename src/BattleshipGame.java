@@ -1,35 +1,25 @@
-package model;
-
-import controller.CoordinateController;
-import model.ship.ShipModel;
-import model.ship.ShipTypes;
-
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class BattleshipGame {
-    private Scanner scanner;
+    private Map<String, Integer> ships;
     private char[][] gameMap;
 
     public BattleshipGame() {
-        this.gameMap = new char[10][10];
-        for (char[] index : gameMap) {
-            Arrays.fill(index, '~');
+        ships = new LinkedHashMap<>();
+        ships.put("Carrier", 5);
+        ships.put("Battleship", 4);
+        ships.put("Cruiser", 3);
+        ships.put("Submarine", 3);
+        ships.put("Destroyer", 2);
+
+        ships.forEach((k, v) -> System.out.println(k + ": " + v));
+        System.out.println();
+
+        gameMap = new char[10][10];
+        for (char[] location : gameMap) {
+            Arrays.fill(location, '~')
         }
     }
-
-    public char[] showMap() {
-        for (char[] index : gameMap) {
-            System.out.println(index);
-        }
-    }
-
-
-
-
-
-
-
-
 }
