@@ -70,7 +70,7 @@ public class BattleshipGame {
         }
 
 
-        /* Parse alphanumeric coordinates to their respective array indexes for an effort less resembling on the map
+        /* Parse alphanumeric coordinates to their respective array indexes for an effort less resembling on the game map
          */
         int[] parsedCoords = new int[4];
         for (int i = 0; i < splitInput.length; i++) {
@@ -78,6 +78,7 @@ public class BattleshipGame {
             parsedCoords[i * 2] = splitInput[i].charAt(0) - 65;
             parsedCoords[i * 2 + 1] = Integer.parseInt(splitInput[i].substring(1)) - 1;
         }
+// parsedCoords works as intended
 
         int[] allShipPartsCoords;
         int xCoord = parsedCoords[0];
