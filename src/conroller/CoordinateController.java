@@ -65,11 +65,11 @@ public class CoordinateController {
     }
 
     /**
-     * User input consists only of the coordinates of a ships front and tail, the ship's body part's locations
-     * have to be extrapolated from these.
+     * User input consists only of the coordinates of a ship's front and tail, the licatins of the body parts
+     * of the ship have to be extrapolated from these.
      *
      * @param parsedCoords index 0 and 1 represent the ships front, index 2 and 3 the tail.
-     * @return an array containing the parsedCoords and the extrapolated coords.
+     * @return an array containing the parsedCoords and the extrapolatecd coords.
      */
     private static int[] extrapolateBodyCoords(int[] parsedCoords) {
         int[] allShipPartsCoords = new int[ship.getSize() * 2];
@@ -81,6 +81,8 @@ public class CoordinateController {
          * for all coordinates and only the odd indexes are extrapolated.
          * In this case, the 3rd index determines the upper limit for the extrapolation.
          */
+
+
         if (parsedCoords[0] == parsedCoords[2]) {
             for (int i = 0; i < parsedCoords[3]; i++) {
                 if (i % 2 == 0) {

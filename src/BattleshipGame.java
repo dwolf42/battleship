@@ -85,7 +85,11 @@ public class BattleshipGame {
         int yCoord = parsedCoords[1];
 
         /* The user only inputs the coordinates of the ship's front and tail,
-         * which means the parts of the ship which lay in between these will have to be computed.
+         * which means the ship parts that lay between front and trail must be calculated.
+         * On a 2D array, the position of the front is represented by an XY-index-piar
+         * e.g. 0,2 to mark the front, and 0,6 to mark the back
+         *
+         *
          */
         if (parsedCoords[0] == parsedCoords[2]) {
             /* As two index-parts of the parsed coordinates are always the same on a 2D array,
@@ -94,11 +98,11 @@ public class BattleshipGame {
             allShipPartsCoords = new int[Math.abs(parsedCoords[1] - parsedCoords[3]) + 1];
 
 // FIXME: coordinate computation of the body parts
-           for (int i = 0; i < parsedCoords[3]; i++) {
-               if (i % 2 == 0) {
-                   allShipPartsCoords[i] = xCoord;
-               }
-           }
+            for (int i = 0; i < parsedCoords[3]; i++) {
+                if (i % 2 == 0) {
+                    allShipPartsCoords[i] = xCoord;
+                }
+            }
         } else {
             allShipPartsCoords = new int[Math.abs(parsedCoords[0] - parsedCoords[2]) + 1];
         }
