@@ -16,6 +16,7 @@ public class BattleshipStarter {
     public static void main(String[] args) {
 //       BattleshipGame game = new BattleshipGame();
 //       game.start();
+
         GameController game = new GameController();
         game.runGame();
     }

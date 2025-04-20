@@ -85,9 +85,12 @@ public class BattleshipGame {
         int yCoord = parsedCoords[1];
 
         /* The user only inputs the coordinates of the ship's front and tail,
-         * which means the ship parts that lay between front and trail must be calculated.
-         * On a 2D array, the position of the front is represented by an XY-index-piar
-         * e.g. 0,2 to mark the front, and 0,6 to mark the back
+         * which means the ship parts that lay between them must be calculated.
+         * Each of these two points are represented by a pair of coordinates, X and Y.
+         * Here are two examples:
+         * a) 0 2 mark the front, 0 6 mark the tail (horizontal alignment)
+         * b) 0 6 mark the front, 2 6 mark the tail (vertical alignment)
+         * Putting these in an array, the representation would be [0, 2, 0, 6]
          *
          *
          */
@@ -101,11 +104,24 @@ public class BattleshipGame {
             for (int i = 0; i < parsedCoords[3]; i++) {
                 if (i % 2 == 0) {
                     allShipPartsCoords[i] = xCoord;
+                } else {
+                    allShipPartsCoords[i] = yCoord;
+                    yCoord++;
                 }
             }
-        } else {
-            allShipPartsCoords = new int[Math.abs(parsedCoords[0] - parsedCoords[2]) + 1];
+            System.out.println("allShipPartsCoords: " + Arrays.toString(allShipPartsCoords));
         }
 
+        if (parsedCoords[1] == parsedCoords[3]) {
+            allShipPartsCoords = new int[Math.abs(parsedCoords[0] - parsedCoords[2]) + 1];
+            for (int i = 0; i < parsedCoords[2]; i++) {
+                if (i % 2 == 0) {
+                    allShipPartsCoords[i] = xCoord;
+                    xCoord++;
+                }
+                allShipPartsCoords[i] = yCoord;
+            }
+            System.out.println("allShipPartsCoords: " + Arrays.toString(allShipPartsCoords));
+        }
     }
 }
