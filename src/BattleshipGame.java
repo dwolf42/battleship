@@ -82,48 +82,45 @@ public class BattleshipGame {
 
 
 
-/* The user only enters the positions for the front and tail of the ship. The missing positions of the other ship parts
- * in between can be calculated using the available positions.
- * Each position is represented by two coordinates on a 2D array, so the total number of
- * coordinates required corresponds to ship length n * 2.
- *
- */
+        /* The user only enters the positions for the front and tail of the ship. The missing positions of the other ship parts
+         * in between can be calculated using the available positions.
+         * Each position is represented by two coordinates on a 2D array, so the total number of
+         * coordinates required corresponds to ship length n * 2.
+         *
+         */
         int[] allShipPartsCoords;
-       // Die Front wird durch die Koordinaten X1 und Y1 dargestell.
-       // Der Schwanz wird durch die Koordinaten X2 und Y2 dargestellt.
-       // Bei einer horizontalen Ausrichtung des Schiffs, gleichen sich X1 und X2,
-       // wohingegen sich bei einer vertikalen Ausrichtung Y1 und Y2 gleichen.
+        // Die Front wird durch die Koordinaten X1 und Y1 dargestell und der Schwanz durch X2 und Y2.
+        // Bei einer horizontalen Ausrichtung des Schiffs verändern sich Y1 und Y2,
+        // bei einer vertikalen Ausrichtung verändern sich X1 und X2.
 
-        int baseCoordA = parsedCoords[0];
-        int baseCoordB = parsedCoords[1];
-
+        // Wenn Index 0 und 2 gleich sind, muss sich Index 1 verändern, um die fehlenden Koordinaten zu berechnen
         if (parsedCoords[0] == parsedCoords[2]) {
-            /* As two index-parts of the parsed coordinates are always the same on a 2D array,
-             * the ship's size can be calculated, which is used to determine the length of @param allShipPartsCoords
-             */
+            int itMustBeChanged = parsedCoords[1]
             int arraySize = 2 * ((Math.abs(parsedCoords[1] - parsedCoords[3]) + 1));
             allShipPartsCoords = new int[arraySize];
 
             for (int i = 0; i < allShipPartsCoords.length; i++) {
                 if (i % 2 == 0) {
-                    allShipPartsCoords[i] = baseCoordA;
+                    allShipPartsCoords[i] = parsedCoords[0];
                 } else {
-                    allShipPartsCoords[i] = baseCoordB;
-                    baseCoordB++;
+                    allShipPartsCoords[i] = itMustBeChanged;
+                    itMustBeChanged++;
                 }
             }
             System.out.println(Arrays.toString(allShipPartsCoords));
         }
 
+        // Wenn Index 1 und 3 gleich sind, muss sich Index 0 verändern, um die fehlenden Koordinaten zu berechnen
         if (parsedCoords[1] == parsedCoords[3]) {
+            int itMustBeChanged = parsedCoords[0]
             int arraySize = 2 * ((Math.abs(parsedCoords[0] - parsedCoords[2]) + 1));
             allShipPartsCoords = new int[arraySize];
             for (int i = 0; i < allShipPartsCoords.length; i++) {
                 if (i % 2 == 0) {
-                    allShipPartsCoords[i] = baseCoordA;
-                    baseCoordA++;
+                    allShipPartsCoords[i] = itMustBeChanged;
+                    itMustBeChanged++;
                 } else {
-                    allShipPartsCoords[i] = baseCoordB;
+                    allShipPartsCoords[i] = parsedCoords[1];
                 }
             }
         }
