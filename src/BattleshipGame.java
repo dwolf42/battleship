@@ -98,10 +98,10 @@ public class BattleshipGame {
             /* As two index-parts of the parsed coordinates are always the same on a 2D array,
              * the ship's size can be calculated, which is used to determine the length of @param allShipPartsCoords
              */
-            allShipPartsCoords = new int[Math.abs(parsedCoords[1] - parsedCoords[3]) + 1];
+            int arraySize = 2 * ((Math.abs(parsedCoords[1] - parsedCoords[3]) + 1));
+            allShipPartsCoords = new int[arraySize];
 
-// FIXME: coordinate computation of the body parts
-            for (int i = 0; i < parsedCoords[3]; i++) {
+            for (int i = 0; i < allShipPartsCoords.length; i++) {
                 if (i % 2 == 0) {
                     allShipPartsCoords[i] = xCoord;
                 } else {
@@ -113,13 +113,15 @@ public class BattleshipGame {
         }
 
         if (parsedCoords[1] == parsedCoords[3]) {
-            allShipPartsCoords = new int[Math.abs(parsedCoords[0] - parsedCoords[2]) + 1];
-            for (int i = 0; i < parsedCoords[2]; i++) {
+            int arraySize = 2 * ((Math.abs(parsedCoords[0] - parsedCoords[2]) + 1));
+            allShipPartsCoords = new int[arraySize];
+            for (int i = 0; i < allShipPartsCoords.length; i++) {
                 if (i % 2 == 0) {
                     allShipPartsCoords[i] = xCoord;
                     xCoord++;
+                } else {
+                    allShipPartsCoords[i] = yCoord;
                 }
-                allShipPartsCoords[i] = yCoord;
             }
             System.out.println("allShipPartsCoords: " + Arrays.toString(allShipPartsCoords));
         }

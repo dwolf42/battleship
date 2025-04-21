@@ -14,10 +14,10 @@ import java.util.Map;
 
 public class BattleshipStarter {
     public static void main(String[] args) {
-//       BattleshipGame game = new BattleshipGame();
-//       game.start();
+       BattleshipGame game = new BattleshipGame();
+       game.start();
 
-        GameController game = new GameController();
-        game.runGame();
+//        GameController game = new GameController();
+//        game.runGame();
     }
 }
