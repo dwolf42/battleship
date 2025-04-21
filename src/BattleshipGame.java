@@ -80,20 +80,23 @@ public class BattleshipGame {
         }
 // parsedCoords works as intended
 
-        int[] allShipPartsCoords;
-        int xCoord = parsedCoords[0];
-        int yCoord = parsedCoords[1];
 
-        /* The user only inputs the coordinates of the ship's front and tail,
-         * which means the ship parts that lay between them must be calculated.
-         * Each of these two points are represented by a pair of coordinates, X and Y.
-         * Here are two examples:
-         * a) 0 2 mark the front, 0 6 mark the tail (horizontal alignment)
-         * b) 0 6 mark the front, 2 6 mark the tail (vertical alignment)
-         * Putting these in an array, the representation would be [0, 2, 0, 6]
-         *
-         *
-         */
+
+/* The user only enters the positions for the front and tail of the ship. The missing positions of the other ship parts
+ * in between can be calculated using the available positions.
+ * Each position is represented by two coordinates on a 2D array, so the total number of
+ * coordinates required corresponds to ship length n * 2.
+ *
+ */
+        int[] allShipPartsCoords;
+       // Die Front wird durch die Koordinaten X1 und Y1 dargestell.
+       // Der Schwanz wird durch die Koordinaten X2 und Y2 dargestellt.
+       // Bei einer horizontalen Ausrichtung des Schiffs, gleichen sich X1 und X2,
+       // wohingegen sich bei einer vertikalen Ausrichtung Y1 und Y2 gleichen.
+
+        int baseCoordA = parsedCoords[0];
+        int baseCoordB = parsedCoords[1];
+
         if (parsedCoords[0] == parsedCoords[2]) {
             /* As two index-parts of the parsed coordinates are always the same on a 2D array,
              * the ship's size can be calculated, which is used to determine the length of @param allShipPartsCoords
@@ -103,13 +106,13 @@ public class BattleshipGame {
 
             for (int i = 0; i < allShipPartsCoords.length; i++) {
                 if (i % 2 == 0) {
-                    allShipPartsCoords[i] = xCoord;
+                    allShipPartsCoords[i] = baseCoordA;
                 } else {
-                    allShipPartsCoords[i] = yCoord;
-                    yCoord++;
+                    allShipPartsCoords[i] = baseCoordB;
+                    baseCoordB++;
                 }
             }
-            System.out.println("allShipPartsCoords: " + Arrays.toString(allShipPartsCoords));
+            System.out.println(Arrays.toString(allShipPartsCoords));
         }
 
         if (parsedCoords[1] == parsedCoords[3]) {
@@ -117,13 +120,12 @@ public class BattleshipGame {
             allShipPartsCoords = new int[arraySize];
             for (int i = 0; i < allShipPartsCoords.length; i++) {
                 if (i % 2 == 0) {
-                    allShipPartsCoords[i] = xCoord;
-                    xCoord++;
+                    allShipPartsCoords[i] = baseCoordA;
+                    baseCoordA++;
                 } else {
-                    allShipPartsCoords[i] = yCoord;
+                    allShipPartsCoords[i] = baseCoordB;
                 }
             }
-            System.out.println("allShipPartsCoords: " + Arrays.toString(allShipPartsCoords));
         }
     }
 }
